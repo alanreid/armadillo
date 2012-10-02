@@ -9,7 +9,7 @@ class AddressActor extends Actor {
   def receive = { 		
     case msg: String => {
 
-    	val addressPlugin = new AddressPlugin with UsigAddress
+    	val addressPlugin = new AddressPlugin with UsigAddressPlugin
     	val tokenSeq = addressPlugin.categorize(msg)
 
     	sender ! tokenSeq(0).text

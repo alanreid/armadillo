@@ -7,7 +7,7 @@ trait AddressPlugin extends PluginContainer {
 		def categorize(input: String) = parse(input) 
 }
 
-trait UsigAddress extends Plugin {
+trait UsigAddressPlugin extends Plugin {
 	def parse(input: String): Seq[Token] = { 
 		val modified = input + " pasó por el plugin de la USIG"
 		val token = new Token(text=modified)
@@ -15,7 +15,7 @@ trait UsigAddress extends Plugin {
 	}
 }
 
-trait ArrayAddress extends Plugin {
+trait ArrayAddressPlugin extends Plugin {
 	def parse(input: String): Seq[Token] = { 
 		val modified = input + " pasó por el plugin con arrays"
 		val token = new Token(text=modified)
