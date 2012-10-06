@@ -34,3 +34,6 @@ And make a HTTP request:
 ```
 curl http://localhost:9000/?input=Some Text
 ```
+
+## License
+Apache 2.0: http://www.apache.org/licenses/LICENSE-2.0
