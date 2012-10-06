@@ -4,6 +4,7 @@ import com.typesafe.play.mini._
 import com.typesafe.mini._
 import play.api.mvc._
 import play.api.mvc.Results._
+import play.api.libs.concurrent._
 import akka.actor.{ ActorSystem, Props}
 import akka.dispatch.{Await, Future}
 import akka.pattern.ask
@@ -20,12 +21,17 @@ object Armadillo extends Application {
 	def route = {
 
 		case GET(Path("/")) & QueryString(qs) => Action { 
-			
-			val input = QueryString(qs, "input").getOrElse(Array("")).asInstanceOf[ArrayList[String]].get(0)
 
-			ActorAction[String](dispatcher, input) { reply: String =>
-   				Ok(reply) 
- 			}
+			val input = QueryString(qs, "input").getOrElse(Array("")).asInstanceOf[ArrayList[String]].get(0)
+			
+	        val futureResponse = ask(dispatcher, input).mapTo[Future[Future[DispatcherResponse]]]
+	        val dispatcherResponse = futureResponse flatMap { x => x }
+
+	        AsyncResult {
+				dispatcherResponse.mapTo[DispatcherResponse].asPromise.map { r => 
+					Ok(r.json)
+				}
+ 			}	
 
 		}
 
