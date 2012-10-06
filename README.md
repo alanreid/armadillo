@@ -23,3 +23,5 @@ Note: All HTTP requests and all plugins are executed in a concurrent and non-blo
 * Scala 
 * Akka
 * Play2-mini
+
+#### Getting started
