@@ -4,6 +4,7 @@ Armadillo
 Armadillo is a small REST-based Webservice that extracts meaningful information from a single text input. 
 
 Spoiler 1: No NLP is involved, that's up to your implementation.
+
 Spoiler 2: This is being developed on my spare time and was started 2/Oct/2012, don't expect much awesomeness at this stage :)
 
 #### What the hell does 'meaningful information' mean then?
