@@ -25,3 +25,12 @@ Note: All HTTP requests and all plugins are executed in a concurrent and non-blo
 * Play2-mini
 
 #### Getting started
+
+```
+sbt run
+```
+
+And make a HTTP request:
+```
+curl http://localhost:9000/?input=Some Text
+```
