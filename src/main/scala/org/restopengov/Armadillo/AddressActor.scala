@@ -10,11 +10,10 @@ class AddressActor extends Actor {
     case msg: String => {
 
     	val addressPlugin = new AddressPlugin with UsigAddressPlugin
-    	val tokenSeq = addressPlugin.categorize(msg)
+    	val tokens = addressPlugin.categorize(msg)
 
-    	sender ! tokenSeq(0).text
+    	sender ! tokens
 	}
-    case _ => sender ! "Sorry, AddressActor couldn't understand this message :(" 
   }
 
 }
