@@ -12,7 +12,7 @@ case class Token(
   val category: String    = "undefined",
   val original: String    = "undefined",
   val text: String        = "undefined",
-  val lat: Option[Double] = None,
-  val long: Option[Double]= None,
+  val lat: Option[String] = None,
+  val long: Option[String]= None,
   val tags: Seq[String]   = Seq[String]()
 ) 

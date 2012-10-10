@@ -1,7 +1,7 @@
 package org.restopengov.Armadillo
 
 import org.restopengov.Armadillo.backend.Token
-import org.restopengov.Armadillo.backend.plugins._
+import org.restopengov.Armadillo.backend.plugins.Address._
 import org.restopengov.Armadillo.formatters.json.TokenFormatter._
 import akka.actor.{Actor, ActorRef}
 import akka.actor.Props
@@ -23,13 +23,13 @@ class DispatcherActor extends Actor {
 		case msg: String => {
 
 			val futureAddress  = address ? msg
-			val futureAddress2 = address ? msg
+			//val futureAddress2 = address ? msg
 
 			val response = for {
 		        result <- futureAddress
-		        result2 <- futureAddress2
+		        //result2 <- futureAddress2
 		    } yield {
-		        DispatcherResponse(toJson(Seq(result.asInstanceOf[Token], result2.asInstanceOf[Token])))
+		        DispatcherResponse(toJson(Seq(result.asInstanceOf[Token])))
 		    }
 
 		    sender ! response
