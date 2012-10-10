@@ -44,10 +44,10 @@ trait UsigAddressPlugin extends Plugin {
 			val response = WS.url(url).get().await.get.body.replaceAll("[\\(\\)]", "")
 			val json = Json.parse(response)
 			
-			Seq(
-				(json \ "x").asOpt[String], 
-				(json \ "y").asOpt[String]
-			)
+			val x = (json \ "x").asOpt[String]
+			val y = (json \ "y").asOpt[String]
+
+			convertCoordinates(x, y)
 		} else {
 			Seq()
 		}
@@ -61,9 +61,21 @@ trait UsigAddressPlugin extends Plugin {
 		val response = WS.url(url).get().await.get.body.replaceAll("[\\(\\)]", "")
 		val json = Json.parse(response)
 
-		Seq(
-			(json \ "x").asOpt[String], 
-			(json \ "y").asOpt[String]
+		val x = (json \ "x").asOpt[String]
+		val y = (json \ "y").asOpt[String]
+
+		convertCoordinates(x, y)
+	}
+
+	def convertCoordinates(x: Option[String], y: Option[String]): Seq[Option[String]] = {
+		
+		val url = "http://ws.usig.buenosaires.gob.ar/rest/convertir_coordenadas?x=" + x.getOrElse("") + "&y=" + y.getOrElse("") + "&output=lonlat"
+		val json = WS.url(url).get().await.get.json
+		val result = (json \ "resultado")
+
+		Seq( 
+			(result \ "y").asOpt[String],
+			(result \ "x").asOpt[String]
 		)
 	}
 
