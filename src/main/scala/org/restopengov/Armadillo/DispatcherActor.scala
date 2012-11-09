@@ -16,20 +16,20 @@ case class DispatcherResponse(json: JsValue)
  
 class DispatcherActor extends Actor {
 
-	private lazy val address = context.actorOf(Props[UsigAddressPlugin], name = "address")
+	private val address = context.actorOf(Props[UsigAddressPlugin], name = "address")
+	private val wordlist = context.actorOf(Props[WordlistPlugin], name = "wordlist")
 	implicit val timeout = Timeout(5 seconds)
 
 	def receive = { 		
 		case msg: String => {
 
-			val futureAddress = address ? msg	
-
 			val response = for {
-		        addressResult <- futureAddress
-		        //result2 <- futureAddress2
+		        addressResult <- address ? msg
+		        wordlistResult <- wordlist ? msg
 		    } yield {
 		    	val addr = addressResult.asInstanceOf[Seq[Token]]
-		        DispatcherResponse(toJson(addr))
+		    	val wrds = wordlistResult.asInstanceOf[Seq[Token]]
+		        DispatcherResponse(toJson(addr ++ wrds))
 		    }
 
 		    sender ! response
