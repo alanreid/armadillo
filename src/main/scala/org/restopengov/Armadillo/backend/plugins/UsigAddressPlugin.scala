@@ -11,6 +11,35 @@ case class UsigStreet(id: Int = 0, name: String = "undefined", x: Double = 0.0, 
 
 class UsigAddressPlugin extends Plugin {
 
+	def parse(input: String): Token = { 
+		
+		val tokens = input.split(" ")
+
+		val andIx = tokens.indexOf("y")
+
+		if(andIx != -1) {
+			val street1 = tokens(andIx - 1)
+			val street2 = tokens(andIx + 1)
+
+			val s1  = findStreet(street1)
+			val s2  = findStreet(street2)
+			val coords = findCoordinates(s1, s2)
+
+			if(coords.length == 2) {
+				new Token(
+					original = input,
+					text	 = street1 + " y " + street2,
+					category = "street",
+					lat		 = coords(0),
+					long	 = coords(1),
+					tags	 = Seq(street1, street2, "Lugar")
+				)
+			} else Token()
+
+		} else Token()
+
+	}
+
 	lazy val streets = {
 		WS.url("http://servicios.usig.buenosaires.gov.ar/callejero").get().await.get.json
 	}
@@ -77,34 +106,5 @@ class UsigAddressPlugin extends Plugin {
 			(result \ "y").asOpt[String],
 			(result \ "x").asOpt[String]
 		)
-	}
-
-	def parse(input: String): Token = { 
-		
-		val tokens = input.split(" ")
-
-		val andIx = tokens.indexOf("y")
-
-		if(andIx != -1) {
-			val street1 = tokens(andIx - 1)
-			val street2 = tokens(andIx + 1)
-
-			val s1  = findStreet(street1)
-			val s2  = findStreet(street2)
-			val coords = findCoordinates(s1, s2)
-
-			if(coords.length == 2) {
-				new Token(
-					original = input,
-					text	 = street1 + " y " + street2,
-					category = "street",
-					lat		 = coords(0),
-					long	 = coords(1),
-					tags	 = Seq(street1, street2, "Lugar")
-				)
-			} else Token()
-
-		} else Token()
-
 	}
 }
