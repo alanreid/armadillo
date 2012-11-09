@@ -6,12 +6,11 @@ trait Plugin extends Actor {
 
 	def receive = { 		
 	    case msg: String => {
-	    	val tokens = parse(msg)
-	    	sender ! tokens
+	    	sender ! parse(msg)
 		}
   	}
 
-	def parse(input: String): Token
+	def parse(input: String): Seq[Token]
 }
 
 case class Token(

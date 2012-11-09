@@ -26,17 +26,17 @@ class UsigAddressPlugin extends Plugin {
 			val coords = findCoordinates(s1, s2)
 
 			if(coords.length == 2) {
-				new Token(
+				Seq(Token(
 					original = input,
 					text	 = street1 + " y " + street2,
 					category = "street",
 					lat		 = coords(0),
 					long	 = coords(1),
 					tags	 = Seq(street1, street2, "Lugar")
-				)
-			} else Token()
+				))
+			} else Seq(Token)
 
-		} else Token()
+		} else Seq(Token)
 
 	}
 
