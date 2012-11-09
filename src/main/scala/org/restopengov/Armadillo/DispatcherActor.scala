@@ -1,7 +1,7 @@
 package org.restopengov.Armadillo
 
 import org.restopengov.Armadillo.backend.Token
-import org.restopengov.Armadillo.backend.plugins.Address._
+import org.restopengov.Armadillo.backend.plugins._
 import org.restopengov.Armadillo.formatters.json.TokenFormatter._
 import akka.actor.{Actor, ActorRef}
 import akka.actor.Props
@@ -16,14 +16,13 @@ case class DispatcherResponse(json: JsValue)
  
 class DispatcherActor extends Actor {
 
-	private lazy val address = context.actorOf(Props[AddressActor], name = "address")
+	private lazy val address = context.actorOf(Props[UsigAddressPlugin], name = "address")
 	implicit val timeout = Timeout(5 seconds)
 
 	def receive = { 		
 		case msg: String => {
 
-			val futureAddress  = address ? msg
-			//val futureAddress2 = address ? msg
+			val futureAddress = address ? msg	
 
 			val response = for {
 		        result <- futureAddress

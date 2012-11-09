@@ -1,4 +1,4 @@
-package org.restopengov.Armadillo.backend.plugins.Address
+package org.restopengov.Armadillo.backend.plugins
 
 import org.restopengov.Armadillo.backend._
 import org.restopengov.Armadillo.formatters.json.TokenFormatter._
@@ -9,7 +9,7 @@ import play.api.libs.concurrent._
 
 case class UsigStreet(id: Int = 0, name: String = "undefined", x: Double = 0.0, y: Double = 0.0)
 
-trait UsigAddressPlugin extends Plugin {
+class UsigAddressPlugin extends Plugin {
 
 	lazy val streets = {
 		WS.url("http://servicios.usig.buenosaires.gov.ar/callejero").get().await.get.json

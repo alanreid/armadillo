@@ -1,11 +1,17 @@
 package org.restopengov.Armadillo.backend
 
-trait Plugin {
-	def parse(input: String): Token
-}
+import akka.actor.{Actor, ActorRef}
 
-trait PluginContainer {
-	def categorize(input: String): Token
+trait Plugin extends Actor {
+
+	def receive = { 		
+	    case msg: String => {
+	    	val tokens = parse(msg)
+	    	sender ! tokens
+		}
+  	}
+
+	def parse(input: String): Token
 }
 
 case class Token(
