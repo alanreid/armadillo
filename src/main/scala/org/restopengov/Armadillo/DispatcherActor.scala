@@ -25,10 +25,11 @@ class DispatcherActor extends Actor {
 			val futureAddress = address ? msg	
 
 			val response = for {
-		        result <- futureAddress
+		        addressResult <- futureAddress
 		        //result2 <- futureAddress2
 		    } yield {
-		        DispatcherResponse(toJson(Seq(result.asInstanceOf[Token])))
+		    	val addr = addressResult.asInstanceOf[Seq[Token]]
+		        DispatcherResponse(toJson(addr))
 		    }
 
 		    sender ! response

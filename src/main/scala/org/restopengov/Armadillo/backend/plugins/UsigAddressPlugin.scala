@@ -11,7 +11,7 @@ case class UsigStreet(id: Int = 0, name: String = "undefined", x: Double = 0.0, 
 
 class UsigAddressPlugin extends Plugin {
 
-	def parse(input: String): Token = { 
+	def parse(input: String): Seq[Token] = { 
 		
 		val tokens = input.split(" ")
 
@@ -34,9 +34,9 @@ class UsigAddressPlugin extends Plugin {
 					long	 = coords(1),
 					tags	 = Seq(street1, street2, "Lugar")
 				))
-			} else Seq(Token)
+			} else Seq(new Token)
 
-		} else Seq(Token)
+		} else Seq(new Token)
 
 	}
 
