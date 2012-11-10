@@ -1,9 +1,17 @@
 package org.restopengov.Armadillo.backend.plugins
 
 import org.restopengov.Armadillo.backend._
-import org.restopengov.Armadillo.formatters.json.TokenFormatter._
+import org.restopengov.Armadillo.backend.plugins.Wordlist.formatters.json.WordlistFormatter._
 import play.api.libs.json.Json
-import play.api.libs.json.{JsArray, JsObject}
+import play.api.libs.json.{JsArray, JsObject, JsValue}
+
+case class WordlistToken(
+	val token: String = "",
+	val alias: List[String] = List(""),
+	val tags: List[String] = List(""),
+	val lat: String = "",
+	val lng: String = ""
+)
 
 class WordlistPlugin extends Plugin {
 	
@@ -12,20 +20,22 @@ class WordlistPlugin extends Plugin {
 		val lines = scala.io.Source.fromFile("src/main/scala/org/restopengov/Armadillo/backend/plugins/Wordlist/tokenListSample.es.json").mkString
 		val json = Json.parse(lines)
 
-		val globalTags = json \ "tags"
+		val globalTags = (json \ "tags").as[List[String]]
 
-		(json \ "tokens") match {
-			case arr: JsArray => {
-				arr.value.collect {
-					case item if input.toLowerCase contains  => 
-						new Token(
-							original=input,
-							text=(item \ "token").as[String].toLowerCase,
-							lat=(item \ "geo" \ "lat").as[Option[String]],
-							long=(item \ "geo" \ "lng").as[Option[String]]
-						)
-				}
-			}
+		(json \ "tokens").as[List[WordlistToken]].collect {
+			case item if 
+				(input.toLowerCase contains item.token.toLowerCase) ||  
+				(input.split(" ").map(_.toLowerCase) diff item.alias.map(_.toLowerCase)).length < input.split(" ").length => {
+				
+				new Token(
+					original = input,
+					text     = item.token,
+					lat      = Option(item.lat),
+					long     = Option(item.lng),
+					tags     = globalTags ++ item.tags,
+					category = "wordlist"
+				)
+			}	
 		}
 
 	}
