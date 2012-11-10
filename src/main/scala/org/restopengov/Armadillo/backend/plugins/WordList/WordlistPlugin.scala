@@ -14,10 +14,12 @@ case class WordlistToken(
 )
 
 class WordlistPlugin extends Plugin {
+
+	val wordlist = "src/main/scala/org/restopengov/Armadillo/backend/plugins/Wordlist/tokenListSample.es.json"
 	
 	def parse(input: String): Seq[Token] = { 
 
-		val lines = scala.io.Source.fromFile("src/main/scala/org/restopengov/Armadillo/backend/plugins/Wordlist/tokenListSample.es.json").mkString
+		val lines = scala.io.Source.fromFile(wordlist).mkString
 		val json = Json.parse(lines)
 
 		val globalTags = (json \ "tags").as[List[String]]
