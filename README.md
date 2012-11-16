@@ -1,7 +1,7 @@
 Armadillo
 ===========
 
-Armadillo is a small REST-based Webservice that extracts meaningful information from a single text input. This makes it useful for auto-tagging or data categorization.
+Armadillo is a small REST-based Webservice that extracts meaningful information from a single text input. This makes it useful for auto-tagging and data categorization.
 
 #### What the hell does 'meaningful information' mean?
 Well, in this case, what 'meaningful' information means is defined by the plugins you build. So it's really up to you. 
@@ -10,7 +10,7 @@ For instance, if your input is a blog post, you may want to extract and normaliz
 
 #### How do these plugins work?
 An Armadillo Plugin is basically an Akka Actor, which receives a text and returns a list of Tokens.
-All plugins get the same input text and try to extract information of interest. Once something is found, each plugin return the list of found items (Tokens).
+All plugins get the same input text and try to extract information of interest. Once something is found, each plugin returns a list of found items (Tokens).
 All these lists are later joined, converted to JSON and returned as a HTTP response.
 
 #### Tech
