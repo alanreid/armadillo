@@ -127,7 +127,7 @@ and you get the following response:
 
 
 #### Special Thanks
-Special props to [opensas](http://github.com/opensas) and [martinmoscovich](http://github.com/martinmoscovich), who helped me out a lot with tons of improvements. 
+Special props to [opensas](http://github.com/opensas) and [martinmoscovich](http://github.com/martinmoscovich), who are responsable for the last ton of improvements. 
 
 
 #### Contact me
