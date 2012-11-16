@@ -1,1 +1,1 @@
-object Global extends com.typesafe.play.mini.Setup(org.restopengov.Armadillo.Armadillo)
+object Global extends com.typesafe.play.mini.Setup(armadillo.categorizer.Armadillo)
