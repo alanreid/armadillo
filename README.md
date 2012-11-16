@@ -71,21 +71,21 @@ and you get the following response:
     "lat": -34.603722
 }, {
     "lng": -58.36473439999999,
-    "tags": ["f√∫tbol", "turismo"],
+    "tags": ["fútbol", "turismo"],
     "text": "Estadio Boca Juniors",
     "category": "sitios",
     "original": "bombonera",
     "lat": -34.6366437
 }, {
     "lng": -58.4494717,
-    "tags": ["f√∫tbol"],
+    "tags": ["fútbol"],
     "text": "Estadio River Plate",
     "category": "sitios",
     "original": "river",
     "lat": -34.54667999999999
 }, {
     "lng": null,
-    "tags": ["f√∫tbol"],
+    "tags": ["fútbol"],
     "text": "River Plate",
     "category": "futbol",
     "original": "river",
@@ -114,7 +114,7 @@ and you get the following response:
 }, {
     "lng": null,
     "tags": ["ecologia"],
-    "text": "ecolog√≠a",
+    "text": "ecología",
     "category": "tags",
     "original": "reciclar",
     "lat": null
