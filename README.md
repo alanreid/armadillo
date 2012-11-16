@@ -126,7 +126,7 @@ and you get the following response:
 * [IdeasBA.org](http://ideasba.org) is a social brainstorming platform for cities.
 
 
-#### Special Thanks
+#### Collaborators
 Special props to [opensas](http://github.com/opensas) and [martinmoscovich](http://github.com/martinmoscovich), who are responsable for the last ton of improvements. 
 
 
