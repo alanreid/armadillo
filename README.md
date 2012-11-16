@@ -131,7 +131,7 @@ Special props to [opensas](http://github.com/opensas) and [martinmoscovich](http
 
 
 #### Contact me
-You can contact me at mail [at] alanreid.com.ar or reach out at Twitter: [@alan_reid](http://twitter.com/alan_reid)
+You can contact me at mail [at] alanreid.com.ar or get in touch on Twitter: [@alan_reid](http://twitter.com/alan_reid)
 
 #### License
 Apache 2.0: http://www.apache.org/licenses/LICENSE-2.0
