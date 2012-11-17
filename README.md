@@ -23,7 +23,7 @@ All these lists are later joined, converted to JSON and returned as a HTTP respo
 * WordlistPlugin: Detection and geolocalization of tokens in a dictionary. 
 
 Current Wordlist dictionaries:
-  * Neighbourhood of Buenos Aires
+  * Neighbourhoods of Buenos Aires
   * Police Stations of Buenos Aires
   * Nightclubs and Discos of Buenos Aires
   * Football teams of Argentina
